@@ -1,45 +1,32 @@
-<?php 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h2 class="center">Welcome, Please enter your login...</h2>
+    <form method="POST" action="login.php" class="center">
+        <input type="text" name="user" placeholder="Name">
+        <input type="text" name="pass" placeholder="Surname">
+        <div class="center">
+            <input type="submit" name="lBtn" value="Login">
+        </div>
+    </form>
 
+    <a href="http://localhost/PHPTesting/phptest/Web/index.php" class="center">Register Page</a>
 
+    <?php 
+        include "userFunc.php";
 
-function dataValidation($data){
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
+        if(isset($_POST["lBtn"])){
+            loginUser($_POST['user'], $_POST['pass']);
+        }
 
-    return $data;
-}
+    ?>
 
-function connectDB(){
-    $dbHost = "localhost";
-    $dbUser = "user";
-    $dbPass = "Dinamo20035";
-    $dbName = "userdatatable";
-    $sql = "mysql:host=$dbHost;dbname=$dbName";
-    $dsnOp = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-
-
-    try{
-        $connection = new PDO($sql, $dbUser, $dbPass, $dsnOp);
-        echo "Connection established...";
-    } catch (PDOException $error){
-        echo "Connection error..." . $error->getMessage();
-    }
-
-    $userName = $_POST['user'];
-    $userPass = $_POST['pass'];
-    $safeUserName = dataValidation($userName);
-    $safeUserPass = dataValidation($userPass);
-
-    $insertData = $connection->prepare("INSERT INTO userData(userName, userPass) VALUES (:userName, :userPass)");
-
-    $insertData->bindParam(":userName", $safeUserName);
-    $insertData->bindParam(":userPass", $safeUserPass);
-
-    if($insertData->execute()){
-        echo "Data inserted...";
-    }else{
-        echo "Data failed to insert...";
-    }
-}
-?>
+</body>
