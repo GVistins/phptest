@@ -18,9 +18,9 @@ function dataValidation($data){
 
     try{
         $connection = new PDO($sql, $dbUser, $dbPass, $dsnOp);
-        echo ("Connection established...");
+        consoleLog("Connection established...");
     } catch (PDOException $error){
-        echo ("Connection error..." . $error->getMessage());
+        consoleLog("Connection error..." . $error->getMessage());
     }
 
 function registerUser($name, $sname, $phone, $user, $pass, $gender){
@@ -39,9 +39,9 @@ function registerUser($name, $sname, $phone, $user, $pass, $gender){
     $insertData->bindParam(":gender", $gender);
 
     if($insertData->execute()){
-        echo("Data inserted...");
+        consoleLog("Data inserted...");
     }else{
-        echo("Data failed to insert...");
+        consoleLog("Data failed to insert...");
     }
 }
 
@@ -58,7 +58,7 @@ function loginUser($user, $pass){
         echo $uSearchArr[$i];
     }
 
-    
+
     if(in_array($user, $uSearchArr))
     {
         $userLoc = array_search($user, $uSearchArr);
@@ -70,8 +70,11 @@ function loginUser($user, $pass){
     else{
         echo "<script>alert('Wrong password or username!');</script>";
     };
-
-
 }
+
+function consoleLog($text){
+    echo "<script>console.log(' Console: " . $text . "' );</script>";
+};
+
 ?>
 

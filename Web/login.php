@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="gradient">
 <head>
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
