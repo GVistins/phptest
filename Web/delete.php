@@ -9,23 +9,23 @@
     <title>Login</title>
 </head>
 <body>
-    <h2 class="center">Welcome, Please enter your login...</h2>
-    <form method="POST" action="login.php" class="center">
+    <h2 class="center">Welcome, Please enter your login data to be removed...</h2>
+    <form method="POST" action="delete.php" class="center">
         <input type="text" name="user" placeholder="Username">
         <input type="password" name="pass" placeholder="Password">
         <div class="center">
-            <input type="submit" name="lBtn" value="Login">
+            <input type="submit" name="dBtn" value="Delete">
         </div>
     </form>
 
     <a href="http://localhost/PHPTesting/phptest/Web/index.php" class="center">Register Page</a>
-    <a href="http://localhost/PHPTesting/phptest/Web/delete.php" class="center">Delete</a>
+    <a href="http://localhost/PHPTesting/phptest/Web/login.php" class="center">Login Page</a>
 
     <?php 
         include "userFunc.php";
 
-        if(isset($_POST["lBtn"])){
-            loginUser($_POST['user'], $_POST['pass']);
+        if(isset($_POST["dBtn"])){
+            deleteUser($_POST['user'], $_POST['pass']);
         }
 
     ?>

@@ -25,11 +25,13 @@
         </select>
         <div class="center">
             <input type="submit" name="sBtn" value="Register">
-            <!--<input type="submit" name="rBtn" value="Recieve Data">-->
         </div>
     </form>
+    <div class="center">
+        <a href="http://localhost/PHPTesting/phptest/Web/login.php"><button type="button">Login Page</button></a>
+        <a href="http://localhost/PHPTesting/phptest/Web/delete.php"><button type="button">Delete Data</button></a>
+    </div>
 
-    <a href="http://localhost/PHPTesting/phptest/Web/login.php" class="center">Login Page</a>
 
 
     <?php

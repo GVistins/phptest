@@ -5,7 +5,7 @@ function dataValidation($data){
     $data = htmlspecialchars($data);
 
     return $data;
-}
+};
 
 
     $dbHost = "localhost";
@@ -43,34 +43,46 @@ function registerUser($name, $sname, $phone, $user, $pass, $gender){
     }else{
         consoleLog("Data failed to insert...");
     }
-}
+};
 
 function loginUser($user, $pass){
     global $connection;
 
+
     $loginQ = "SELECT username, password FROM userdatatable";
     $userSearch = $connection->query($loginQ);
+    $userSearch->setFetchMode(PDO::FETCH_ASSOC);
 
-
-    $uSearchArr = $userSearch->fetchAll();
-
-    for($i=0;$i<sizeof($uSearchArr);$i++){
-        echo $uSearchArr[$i];
-    }
-
-
-    if(in_array($user, $uSearchArr))
-    {
-        $userLoc = array_search($user, $uSearchArr);
-        if($userLoc+1 == $pass){
-            header("http://localhost/PHPTesting/phptest/Web/index.php");
-        }
+    $err = 0;
+    while($data = $userSearch->fetch()){
+        if($user == $data['username']){
+            if($pass == $data['password']){
+                echo "<script>alert('Welcome, you are now logged in!');</script>"; 
+                header("http://localhost/PHPTesting/phptest/Web/userData.php");
+                break;
+            }
         
+        }
+    }
+};
+
+function deleteUser($user, $pass){
+    global $connection;
+
+    $deleteQ = $connection->prepare("DELETE FROM userdatatable WHERE :username = username AND :password = password;");
+    $deleteQ->bindParam(":username", $user);
+    $deleteQ->bindParam(":password", $pass);
+
+    if($deleteQ->execute()){
+        consoleLog("Entry deleted...");
+        echo "<script>alert('Data entry deleted...');</script>";
     }
     else{
-        echo "<script>alert('Wrong password or username!');</script>";
-    };
+        consoleLog("Entry not found...");
+        echo "<script>alert('Data entry not found...');</script>";
+    }
 }
+
 
 function consoleLog($text){
     echo "<script>console.log(' Console: " . $text . "' );</script>";
