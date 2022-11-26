@@ -2,21 +2,33 @@
 <!DOCTYPE html>
 <html lang="en" class="gradient">
 <head>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="../script.js"></script>
+    <link rel="stylesheet" href="../style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
 </head>
 <body>
+    <div class="topNav">
+        <div>
+            <a href="http://localhost/PHPTesting/phptest/Web/Webpage/index.php">Home</a>
+            <a href="http://localhost/PHPTesting/phptest/Web/Webpage/register.php" class="active">Register Page</a>
+            <a href="http://localhost/PHPTesting/phptest/Web/Webpage/login.php">Login Page</a>
+            <a href="http://localhost/PHPTesting/phptest/Web/Webpage/delete.php">Delete</a>  
+        </div>
+    </div>
     <h2 class="center">Welcome, Please register...</h2>
     <form method="POST" action="index.php" class="center">
-        <input type="text" name="name" placeholder="Name">
-        <input type="text" name="sname" placeholder="Surname">
+        <div>
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="sname" placeholder="Surname">
+        </div>
         <input type="text" name="phone" placeholder="Phone Number">
-        <input type="text" name="user" placeholder="Username">
-        <input type="password" name="pass" placeholder="Password">
+        <div>
+            <input type="text" name="user" placeholder="Username">
+            <input type="password" name="pass" placeholder="Password">
+        </div>
         <select name="gender">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -27,10 +39,6 @@
             <input type="submit" name="sBtn" value="Register">
         </div>
     </form>
-    <div class="center">
-        <a href="http://localhost/PHPTesting/phptest/Web/login.php"><button type="button">Login Page</button></a>
-        <a href="http://localhost/PHPTesting/phptest/Web/delete.php"><button type="button">Delete Data</button></a>
-    </div>
 
 
 

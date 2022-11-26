@@ -52,14 +52,12 @@ function loginUser($user, $pass){
     $loginQ = "SELECT username, password FROM userdatatable";
     $userSearch = $connection->query($loginQ);
     $userSearch->setFetchMode(PDO::FETCH_ASSOC);
-
-    $err = 0;
+    
     while($data = $userSearch->fetch()){
         if($user == $data['username']){
-            if($pass == $data['password']){
-                echo "<script>alert('Welcome, you are now logged in!');</script>"; 
-                header("http://localhost/PHPTesting/phptest/Web/userData.php");
-                break;
+            if($pass == $data['password']){ 
+                header('Location: http://localhost/PHPTesting/phptest/Web/Webpage/index.php', true, 301);
+                exit();
             }
         
         }
