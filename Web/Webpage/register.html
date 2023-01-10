@@ -12,14 +12,14 @@
 <body>
     <div class="topNav">
         <div>
-            <a href="http://localhost/PHPTesting/phptest/Web/Webpage/index.php">Home</a>
-            <a href="http://localhost/PHPTesting/phptest/Web/Webpage/register.php" class="active">Register Page</a>
-            <a href="http://localhost/PHPTesting/phptest/Web/Webpage/login.php">Login Page</a>
-            <a href="http://localhost/PHPTesting/phptest/Web/Webpage/delete.php">Delete</a>  
+            <a href="index.html">Home</a>
+            <a href="register.html" class="active">Register Page</a>
+            <a href="login.html">Login Page</a>
+            <a href="delete.html">Delete</a>  
         </div>
     </div>
     <h2 class="center">Welcome, Please register...</h2>
-    <form method="POST" action="index.php" class="center">
+    <form method="POST" action="userFunc.php" class="center">
         <div>
             <input type="text" name="name" placeholder="Name">
             <input type="text" name="sname" placeholder="Surname">
@@ -30,28 +30,17 @@
             <input type="password" name="pass" placeholder="Password">
         </div>
         <select name="gender">
+            <option></option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Non-Binary">Non-Binary</option>
-            <option></option>
+            
         </select>
         <div class="center">
             <input type="submit" name="sBtn" value="Register">
         </div>
     </form>
 
-
-
-    <?php
-        include "userFunc.php";
-        if(isset($_POST["sBtn"])){
-            registerUser($_POST["name"], $_POST["sname"], $_POST["phone"], $_POST["user"], $_POST["pass"], $_POST["gender"]);
-        };
-        
-
-
-
-    ?>
 </body>
 </html>
 

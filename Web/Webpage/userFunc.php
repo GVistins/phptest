@@ -7,42 +7,21 @@ function dataValidation($data){
     return $data;
 };
 
+$host = "mouse.db.elephantsql.com";
+$dbname = "Login";
+$user = "lzztbvlx";
+$password = "exOk5zYF01QXsWFe35nt8dUBiCosnUIa";
 
-    $dbHost = "localhost";
-    $dbUser = "user";
-    $dbPass = "Dinamo20035";
-    $dbName = "userdata";
-    $sql = "mysql:host=$dbHost;dbname=$dbName";
-    $dsnOp = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-
-
-    try{
-        $connection = new PDO($sql, $dbUser, $dbPass, $dsnOp);
-        consoleLog("Connection established...");
-    } catch (PDOException $error){
-        consoleLog("Connection error..." . $error->getMessage());
-    }
+$connection = pg_connect("host=$host dbname=$dbname user=$user password=$password")
+or die('Connection error:' . pg_last_error());
 
 function registerUser($name, $sname, $phone, $user, $pass, $gender){
     global $connection;
+    $query = "INSERT INTO userdata(name, surname, phonenum, username, password, gender) VALUES ($name, $sname, $phone, $user, $pass, $gender)";
+    $result = pg_query($connection, $query) or die("Query failed: " . pg_last_error());
 
-    $safeUserName = dataValidation($user);
-    $safeUserPass = dataValidation($pass);
- 
-    $insertData = $connection->prepare("INSERT INTO userdatatable(name, surname, phonenum, username, password, gender) VALUES (:name, :surname, :phone, :user, :pass, :gender)");
-
-    $insertData->bindParam(":name", $name);
-    $insertData->bindParam(":surname", $sname);
-    $insertData->bindParam(":phone", $phone);
-    $insertData->bindParam(":user", $safeUserName);
-    $insertData->bindParam(":pass", $safeUserPass);
-    $insertData->bindParam(":gender", $gender);
-
-    if($insertData->execute()){
-        consoleLog("Data inserted...");
-    }else{
-        consoleLog("Data failed to insert...");
-    }
+    pg_free_result($result);
+    pg_close($connection);
 };
 
 function loginUser($user, $pass){
@@ -86,5 +65,14 @@ function consoleLog($text){
     echo "<script>console.log(' Console: " . $text . "' );</script>";
 };
 
+if(isset($_POST["sBtn"])){
+    registerUser($_POST["name"], $_POST["sname"], $_POST["phone"], $_POST["user"], $_POST["pass"], $_POST["gender"]);
+};
+
+
 ?>
 
+
+        
+        
+        
